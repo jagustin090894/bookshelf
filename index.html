@@ -4,11 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookshelf</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
+
+    <main>
+        <h1>Bookshelf</h1>
+        
+        <form action="" class="form-search">
+            <div class="input-group">
+                <label for="input-search">Search: </label><input type="text" id="input-search" class="form-control" placeholder="Search for books..">
+            </div>
+        </form>
     
-    <h1>Hello World</h1>
+        <ul class="list-book">
+            <li> 
+                <span class="book-name">Harry Potter</span> 
+                <button class="btn btn-delete">Delete</button> 
+            </li>
+            <li>
+                <span class="book-name">Lord of the Rings</span> 
+                <button class="btn btn-delete">Delete</button> 
+            </li>
+            <li>
+                <span class="book-name">The Notebook</span> 
+                <button class="btn btn-delete">Delete</button> 
+            </li>
+            <li>
+                <span class="book-name">Twilight</span> 
+                <button class="btn btn-delete">Delete</button> 
+            </li>
+        </ul>
+    
+        <form action="" class="form-add">
+            <div class="input-group">
+                <input type="text" id="input-add" class="form-control" placeholder="Input book's name you want to add..">
+                <input type="submit" id="button-add" value="Add" class="btn btn-add">
+            </div>
+        </form>
+    </main>
+
+    
     <script src="assets/scripts.js"></script>
 </body>
 </html>
