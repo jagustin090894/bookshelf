@@ -92,6 +92,7 @@ h1 {
 }
 
 .form-control {
+    outline: 0;
     padding: 8px 12px;
     background-color: #f7f8fc;
     border: 1px solid #e0e7ed;
@@ -99,7 +100,7 @@ h1 {
     color: #36434d;
 }
 
-.list-book {
+.book-list {
     padding: 15px;
 
     li {
