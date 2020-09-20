@@ -1,47 +1,57 @@
 'use strict';
-let bookList = document.querySelector('.book-list');
 
-let deleteBook = function() {
+const list = document.querySelector('.book-list');
 
-    bookList.addEventListener('click', function(e) {
+// delete books
 
-        let li = e.target.parentNode;
-        
-        if (e.target.classList.contains = 'btn-delete') {
-            li.parentNode.removeChild(li);
-        }
-    });
-}
+list.addEventListener('click', function(e){
+  if (e.target.classList.contains('btn-delete')){
+    const li = e.target.parentElement;
+    list.removeChild(li);
+  }
 
-let addBook = function() {
+})
 
-    let btnAdd = document.getElementById('btn-add');
+const addForm = document.forms['form-add'];
 
-    btnAdd.addEventListener('click', function(e) {
+addForm.addEventListener('submit', function(e){
+    e.preventDefault();
 
-        e.preventDefault();
+    let value = addForm.querySelector('input[type="text"]').value;
 
-        let input = document.getElementById('input-add');
+    if (value != '') {
+        const li = document.createElement('li');
+        const bookName = document.createElement('span');
+        const deleteBtn = document.createElement('button');
 
-        let book = document.createElement('li');
-        let bookName = document.createElement('span');
-        let btnDelete = document.createElement('button');
+        deleteBtn.textContent = 'delete';
+        bookName.textContent = value;
+            
+        bookName.classList.add('book-name');
+        deleteBtn.classList.add('btn');
+        deleteBtn.classList.add('btn-delete');
 
+        li.appendChild(bookName);
+        li.appendChild(deleteBtn);
+        list.appendChild(li);        
+    }
+});
 
-        book.appendChild(bookName);
-        bookName.innerText = input.value;
-        bookName.className = 'book-name';
+const searchBar = document.forms['form-search'].querySelector('input');
 
-        book.appendChild(btnDelete);
-        btnDelete.innerText = 'Delete';
-        btnDelete.className = 'btn';
-        btnDelete.classList.add('btn-delete');
+searchBar.addEventListener('keyup', function(e){
 
-        bookList.appendChild(book);
+  const term = e.target.value.toLowerCase();
+  const books = list.getElementsByTagName('li');
+  
+  Array.from(books).forEach(function(book){
+      
+    const title = book.firstElementChild.textContent;
 
-        input.value = '';
-    })
-}
- 
-deleteBook();
-addBook();
+    if (title.toLowerCase().indexOf(term) != -1){
+      book.style.display = 'flex';
+    } else {
+      book.style.display = 'none';
+    }
+  });
+});
