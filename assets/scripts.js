@@ -2,7 +2,7 @@
 
 const bookList = document.querySelector('.book-list');
 
-const deleteBook = function(e) {
+const deleteBook = e => {
   e.parentNode.remove();
 }
 
