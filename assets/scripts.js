@@ -1,57 +1,49 @@
 'use strict';
 
-const list = document.querySelector('.book-list');
+const bookList = document.querySelector('.book-list');
 
-// delete books
-
-list.addEventListener('click', function(e){
-  if (e.target.classList.contains('btn-delete')){
-    const li = e.target.parentElement;
-    list.removeChild(li);
-  }
-
-})
+const deleteBook = function(e) {
+  e.parentNode.remove();
+}
 
 const addForm = document.forms['form-add'];
 
-addForm.addEventListener('submit', function(e){
-    e.preventDefault();
+addForm.addEventListener('submit', e => {
+  e.preventDefault();
 
-    let value = addForm.querySelector('input[type="text"]').value;
+  const userInput = document.getElementById('input-add').value;
 
-    if (value != '') {
-        const li = document.createElement('li');
-        const bookName = document.createElement('span');
-        const deleteBtn = document.createElement('button');
+  if (userInput) {
+    const html = 
+    `<li>
+      <span class="book-name">${userInput}</span>
+      <button class="btn btn-delete" onclick="deleteBook(this)">Delete</button>
+    </li>`;
 
-        deleteBtn.textContent = 'delete';
-        bookName.textContent = value;
-            
-        bookName.classList.add('book-name');
-        deleteBtn.classList.add('btn');
-        deleteBtn.classList.add('btn-delete');
-
-        li.appendChild(bookName);
-        li.appendChild(deleteBtn);
-        list.appendChild(li);        
-    }
+    bookList.innerHTML += html;        
+  } else {
+    alert('Please enter the book\'s name');
+  }
 });
 
-const searchBar = document.forms['form-search'].querySelector('input');
+const searchForm = document.forms['form-search'];
 
-searchBar.addEventListener('keyup', function(e){
+searchForm.addEventListener('submit', e => {
+  e.preventDefault();
+})
 
-  const term = e.target.value.toLowerCase();
-  const books = list.getElementsByTagName('li');
-  
-  Array.from(books).forEach(function(book){
-      
-    const title = book.firstElementChild.textContent;
+const searchInput = document.getElementById('input-search');
 
-    if (title.toLowerCase().indexOf(term) != -1){
-      book.style.display = 'flex';
+searchInput.addEventListener('keyup', () => {
+  const searchValue = searchInput.value.toLowerCase();
+  const bookNames = document.querySelectorAll('.book-name');
+
+  bookNames.forEach((bookName) => {
+    
+    if (bookName.textContent.toLowerCase().indexOf(searchValue) != -1) {
+      bookName.parentNode.style.display = 'flex';
     } else {
-      book.style.display = 'none';
+      bookName.parentNode.style.display = 'none';
     }
-  });
+  })
 });
