@@ -6,9 +6,9 @@ const deleteBook = e => {
   e.parentNode.remove();
 }
 
-const addForm = document.forms['form-add'];
+const addBook = document.forms['form-add'];
 
-addForm.addEventListener('submit', e => {
+addBook.addEventListener('submit', e => {
   e.preventDefault();
 
   const userInput = document.getElementById('input-add').value;
@@ -22,13 +22,13 @@ addForm.addEventListener('submit', e => {
 
     bookList.innerHTML += html;        
   } else {
-    alert('Please enter the book\'s name');
+    document.querySelector('body').classList.toggle('has-modal');
   }
 });
 
-const searchForm = document.forms['form-search'];
+const searchBook = document.forms['form-search'];
 
-searchForm.addEventListener('submit', e => {
+searchBook.addEventListener('submit', e => {
   e.preventDefault();
 })
 
@@ -47,3 +47,13 @@ searchInput.addEventListener('keyup', () => {
     }
   })
 });
+
+const modal = document.querySelector('.modal');
+const btns = modal.querySelectorAll('button');
+
+btns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelector('body').classList.toggle('has-modal');
+  })
+})
+
